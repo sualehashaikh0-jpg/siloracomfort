@@ -1,26 +1,57 @@
 @import "tailwindcss";
 
+/* ── SILORA design tokens ─────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --sand: #d8c6ac;        /* nav bar taupe */
+  --sand-deep: #c6b192;   /* hover / borders on sand */
+  --ivory: #edece7;       /* page background */
+  --marble: #e4e0d7;      /* section alt background */
+  --charcoal: #2b2a26;    /* primary text */
+  --gold: #b3925f;        /* monogram + accents */
+  --muted: #726c60;       /* secondary text */
+  --line: #d5cfc2;        /* hairline dividers */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--ivory);
+  color: var(--charcoal);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Wide-tracked utility for the wordmark + nav */
+.tracking-brand {
+  letter-spacing: 0.38em;
+}
+.tracking-nav {
+  letter-spacing: 0.18em;
+}
+
+/* Scroll-reveal base state (Reveal.tsx flips these) */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Slow ambient float for the scroll cue */
+@keyframes drift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+.animate-drift {
+  animation: drift 2.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .animate-drift { animation: none; }
 }
