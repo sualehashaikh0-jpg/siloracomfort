@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Reveal from "./Reveal";
-import type { Category } from "@/lib/queries";
+import type { CategoryTile } from "@/lib/queries";
 
 const tones = ["#d9cdb8", "#cfc4ae", "#c5b79d", "#d3c6ad"];
 const taglines: Record<string, string> = {
@@ -10,7 +10,7 @@ const taglines: Record<string, string> = {
   "bed-sets": "Complete looks, perfectly matched",
 };
 
-export default function Collections({ categories }: { categories: Category[] }) {
+export default function Collections({ categories }: { categories: CategoryTile[] }) {
   return (
     <section id="collections" className="mx-auto max-w-7xl px-6 py-20 md:px-10 md:py-28">
       <Reveal>
@@ -30,9 +30,12 @@ export default function Collections({ categories }: { categories: Category[] }) 
               className="group block overflow-hidden"
             >
               <div
-                className="aspect-[3/4] w-full transition-transform duration-700 group-hover:scale-[1.03]"
+                className="aspect-[3/4] w-full bg-cover bg-center transition-transform duration-700 group-hover:scale-[1.03]"
                 style={{
-                  background: `linear-gradient(160deg, ${tones[i % tones.length]}, #cbbfa8)`,
+                  backgroundColor: tones[i % tones.length],
+                  backgroundImage: c.image
+                    ? `url('${c.image}')`
+                    : `linear-gradient(160deg, ${tones[i % tones.length]}, #cbbfa8)`,
                 }}
                 role="img"
                 aria-label={c.name}

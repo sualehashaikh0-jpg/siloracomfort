@@ -5,14 +5,14 @@ import FeaturedProducts from "@/components/FeaturedProducts";
 import Reviews from "@/components/Reviews";
 import Footer from "@/components/Footer";
 import PromoPopup from "@/components/PromoPopup";
-import { getFeaturedProducts, getCategories } from "@/lib/queries";
+import { getFeaturedProducts, getCategoryTiles } from "@/lib/queries";
 
 export const revalidate = 60;
 
 export default async function Home() {
   const [featured, categories] = await Promise.all([
     getFeaturedProducts(),
-    getCategories(),
+    getCategoryTiles(),
   ]);
 
   return (

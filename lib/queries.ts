@@ -119,3 +119,46 @@ export async function getProductBySlug(
 
   return { product, variants: variants ?? [] };
 }
+
+/* ---------- Category tiles with a preview image ---------- */
+export type CategoryTile = Category & { image: string | null };
+
+/**
+ * Categories, each with one product image pulled from a product in that
+ * category (newest active product with at least one image). Powers the
+ * homepage "THE RANGE" tiles so they're never blank once products exist.
+ */
+export async function getCategoryTiles(): Promise<CategoryTile[]> {
+  const categories = await getCategories();
+  if (categories.length === 0) return [];
+
+  // Pull active products that have images, newest first, then map the first
+  // image we find per category.
+  const { data: products, error } = await supabase
+    .from("products")
+    .select("category_id, images, created_at")
+    .eq("is_active", true)
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("getCategoryTiles:", error.message);
+    return categories.map((c) => ({ ...c, image: null }));
+  }
+
+  const imageByCategory = new Map<number, string>();
+  for (const p of products ?? []) {
+    if (
+      p.category_id != null &&
+      Array.isArray(p.images) &&
+      p.images.length > 0 &&
+      !imageByCategory.has(p.category_id)
+    ) {
+      imageByCategory.set(p.category_id, p.images[0]);
+    }
+  }
+
+  return categories.map((c) => ({
+    ...c,
+    image: imageByCategory.get(c.id) ?? null,
+  }));
+}
