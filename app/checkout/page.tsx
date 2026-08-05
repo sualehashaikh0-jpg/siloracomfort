@@ -116,12 +116,22 @@ export default function CheckoutPage() {
                 ))}
               </div>
 
-              {method === "sadapay" && (
+              {(method === "sadapay" || method === "easypaisa") && (
                 <div className="mt-3 border border-[var(--line)] bg-[var(--marble)] p-4 text-sm text-[var(--charcoal)]">
-                  Send <strong>{pkr(total)}</strong> to SadaPay account{" "}
-                  <strong>0300-0000000</strong> (SILORA). Place the order below,
-                  then send the payment screenshot to our WhatsApp — we&apos;ll
-                  confirm and ship.
+                  Send <strong>{pkr(total)}</strong> to our{" "}
+                  {method === "sadapay" ? "SadaPay" : "Easypaisa"} account{" "}
+                  <strong>0345 0088846</strong> (SILORA). For better
+                  communication and a smooth process, we prefer you send a
+                  screenshot of your payment to our WhatsApp{" "}
+                  <a
+                    href="https://wa.me/923450088846"
+                    className="underline underline-offset-2"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    0345 0088846
+                  </a>
+                  . We&apos;ll confirm and ship right away.
                 </div>
               )}
             </div>

@@ -8,7 +8,7 @@ const links = [
   { href: "/", label: "HOME" },
   { href: "/collections", label: "COLLECTIONS" },
   { href: "/shop", label: "SHOP ALL" },
-  { href: "/story", label: "STORY" },
+  { href: "/#reviews", label: "REVIEWS" },
 ];
 
 export default function Navbar() {
@@ -55,13 +55,6 @@ export default function Navbar() {
               </span>
             )}
           </Link>
-          <Link
-            href="/account"
-            className="tracking-nav hidden items-center gap-2 text-[13px] text-[var(--charcoal)]/85 transition-colors hover:text-[var(--charcoal)] sm:flex"
-          >
-            <UserIcon />
-            <span>USER</span>
-          </Link>
 
           {/* Mobile hamburger */}
           <button
@@ -91,15 +84,6 @@ export default function Navbar() {
               </Link>
             </li>
           ))}
-          <li>
-            <Link
-              href="/account"
-              onClick={() => setOpen(false)}
-              className="tracking-nav block py-3 text-[13px] text-[var(--charcoal)]/85"
-            >
-              USER
-            </Link>
-          </li>
         </ul>
       )}
     </header>
@@ -112,15 +96,6 @@ function CartIcon() {
       <path d="M6 6h15l-1.5 9h-12L5 3H2" strokeLinecap="round" strokeLinejoin="round" />
       <circle cx="9" cy="20" r="1.4" />
       <circle cx="18" cy="20" r="1.4" />
-    </svg>
-  );
-}
-
-function UserIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden>
-      <circle cx="12" cy="8" r="3.6" />
-      <path d="M4.5 20c1.6-3.2 4.3-4.8 7.5-4.8s5.9 1.6 7.5 4.8" strokeLinecap="round" />
     </svg>
   );
 }

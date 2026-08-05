@@ -8,16 +8,14 @@ const shopLinks = [
 ];
 
 const helpLinks = [
-  { href: "/shipping", label: "Shipping Details" },
-  { href: "/returns", label: "Return & Exchange" },
-  { href: "/faqs", label: "FAQs" },
-  { href: "/contact", label: "Contact" },
+  { href: "/#reviews", label: "Reviews" },
+  { href: "/shop", label: "Shop All" },
 ];
 
 export default function Footer() {
   return (
     <footer className="bg-[var(--sand)]">
-      <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:grid-cols-4 md:px-10">
+      <div className="mx-auto grid gap-12 px-6 py-16 md:grid-cols-4 md:px-10 max-w-7xl">
         {/* Brand */}
         <div>
           <p className="tracking-brand text-lg font-light text-[var(--charcoal)]">
@@ -34,10 +32,7 @@ export default function Footer() {
           <ul className="mt-4 space-y-2.5">
             {shopLinks.map((l) => (
               <li key={l.href}>
-                <Link
-                  href={l.href}
-                  className="text-sm text-[var(--charcoal)]/75 transition-colors hover:text-[var(--charcoal)]"
-                >
+                <Link href={l.href} className="text-sm text-[var(--charcoal)]/75 transition-colors hover:text-[var(--charcoal)]">
                   {l.label}
                 </Link>
               </li>
@@ -45,16 +40,13 @@ export default function Footer() {
           </ul>
         </nav>
 
-        {/* Help */}
-        <nav aria-label="Help">
-          <h3 className="tracking-nav text-[12px] text-[var(--charcoal)]">HELP</h3>
+        {/* Explore */}
+        <nav aria-label="Explore">
+          <h3 className="tracking-nav text-[12px] text-[var(--charcoal)]">EXPLORE</h3>
           <ul className="mt-4 space-y-2.5">
             {helpLinks.map((l) => (
               <li key={l.href}>
-                <Link
-                  href={l.href}
-                  className="text-sm text-[var(--charcoal)]/75 transition-colors hover:text-[var(--charcoal)]"
-                >
+                <Link href={l.href} className="text-sm text-[var(--charcoal)]/75 transition-colors hover:text-[var(--charcoal)]">
                   {l.label}
                 </Link>
               </li>
@@ -62,28 +54,21 @@ export default function Footer() {
           </ul>
         </nav>
 
-        {/* Newsletter */}
+        {/* Contact */}
         <div>
-          <h3 className="tracking-nav text-[12px] text-[var(--charcoal)]">
-            STAY IN TOUCH
-          </h3>
-          <p className="mt-4 text-sm text-[var(--charcoal)]/75">
-            New drops and sale alerts, no spam.
-          </p>
-          <div className="mt-4 flex border border-[var(--charcoal)]/40">
-            <input
-              type="email"
-              placeholder="Email address"
-              aria-label="Email address"
-              className="w-full bg-transparent px-3 py-2.5 text-sm text-[var(--charcoal)] placeholder:text-[var(--charcoal)]/45 focus:outline-none"
-            />
-            <button
-              type="button"
-              className="tracking-nav bg-[var(--charcoal)] px-4 text-[12px] text-[var(--ivory)] transition-opacity hover:opacity-90"
-            >
-              JOIN
-            </button>
-          </div>
+          <h3 className="tracking-nav text-[12px] text-[var(--charcoal)]">CONTACT</h3>
+          <ul className="mt-4 space-y-2.5 text-sm text-[var(--charcoal)]/75">
+            <li>
+              <a href="https://wa.me/923450088846" className="transition-colors hover:text-[var(--charcoal)]">
+                WhatsApp: 0345 0088846
+              </a>
+            </li>
+            <li>
+              <a href="mailto:help.silora@gmail.com" className="transition-colors hover:text-[var(--charcoal)]">
+                help.silora@gmail.com
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
 
