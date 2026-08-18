@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import TrustBadges from "@/components/TrustBadges";
 import Collections from "@/components/Collections";
 import FeaturedProducts from "@/components/FeaturedProducts";
 import Reviews from "@/components/Reviews";
@@ -21,6 +22,7 @@ export default async function Home() {
       <Navbar />
       <main>
         <Hero />
+        <TrustBadges />
         <Collections categories={categories} />
         <FeaturedProducts products={featured} />
         <Reviews />

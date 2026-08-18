@@ -55,3 +55,15 @@ body {
   .reveal { opacity: 1; transform: none; transition: none; }
   .animate-drift { animation: none; }
 }
+/* Announcement bar marquee */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  display: inline-block;
+  animation: marquee 22s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee { animation: none; }
+}

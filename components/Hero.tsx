@@ -1,7 +1,6 @@
 /**
- * Hero — uses public/hero.jpg (SILORA wordmark is baked into the image,
- * so no text is rendered over it). A warm gradient stands in if the image
- * is missing, so the section never looks broken.
+ * Hero — public/hero.jpg with a permanent "Up to 50% Off" overlay.
+ * SILORA wordmark is baked into the image; we add the promo text + CTA.
  */
 export default function Hero() {
   return (
@@ -14,28 +13,37 @@ export default function Hero() {
         backgroundPosition: "center, center",
       }}
     >
-      {/* Gentle bottom scrim so the CTA stays readable over any image */}
+      {/* Bottom scrim for readable overlay text */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "linear-gradient(to bottom, rgba(0,0,0,0) 55%, rgba(43,42,38,0.28) 100%)",
+            "linear-gradient(to bottom, rgba(0,0,0,0) 45%, rgba(43,42,38,0.42) 100%)",
         }}
       />
 
-      <div className="relative mx-auto w-full max-w-7xl px-6 pb-14 md:px-10 md:pb-16">
-        <div className="flex justify-center">
+      <div className="relative mx-auto w-full max-w-7xl px-6 pb-16 md:px-10 md:pb-20">
+        <div className="flex flex-col items-center text-center">
+          <p className="tracking-nav text-[12px] text-[var(--ivory)]/90">
+            THIS SEASON
+          </p>
+          <h2 className="mt-2 font-[family-name:var(--font-cormorant)] text-4xl leading-tight text-[var(--ivory)] md:text-6xl">
+            Up to 50% Off
+          </h2>
+          <p className="mt-2 font-[family-name:var(--font-cormorant)] text-lg italic text-[var(--ivory)]/90">
+            Free delivery for the first 500 customers
+          </p>
+
           <a
             href="#collections"
-            className="tracking-nav border border-[var(--ivory)]/70 bg-[var(--charcoal)]/20 px-8 py-3 text-[13px] text-[var(--ivory)] backdrop-blur-sm transition-colors hover:bg-[var(--ivory)] hover:text-[var(--charcoal)]"
+            className="tracking-nav mt-7 border border-[var(--ivory)]/70 bg-[var(--charcoal)]/20 px-8 py-3 text-[13px] text-[var(--ivory)] backdrop-blur-sm transition-colors hover:bg-[var(--ivory)] hover:text-[var(--charcoal)]"
           >
             SHOP THE COLLECTIONS
           </a>
         </div>
       </div>
 
-      {/* Scroll cue */}
       <a
         href="#collections"
         aria-label="Scroll to collections"

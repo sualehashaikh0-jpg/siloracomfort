@@ -3,20 +3,22 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-const SEEN_KEY = "silora_promo_seen_v1";
-
+/**
+ * Promo popup — shows on EVERY visit (per session, so it doesn't re-fire on
+ * every client navigation within the same visit). Dismissible.
+ */
 export default function PromoPopup() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    // Show once per visitor; a short delay feels intentional, not jarring.
-    let seen = false;
+    // sessionStorage: appears once per browser session (i.e. every fresh visit)
+    let shown = false;
     try {
-      seen = localStorage.getItem(SEEN_KEY) === "1";
+      shown = sessionStorage.getItem("silora_promo_shown") === "1";
     } catch {
       /* private mode — just show it */
     }
-    if (!seen) {
+    if (!shown) {
       const t = setTimeout(() => setOpen(true), 900);
       return () => clearTimeout(t);
     }
@@ -25,7 +27,7 @@ export default function PromoPopup() {
   function close() {
     setOpen(false);
     try {
-      localStorage.setItem(SEEN_KEY, "1");
+      sessionStorage.setItem("silora_promo_shown", "1");
     } catch {
       /* ignore */
     }
@@ -38,16 +40,14 @@ export default function PromoPopup() {
       className="fixed inset-0 z-[100] flex items-center justify-center px-5"
       role="dialog"
       aria-modal="true"
-      aria-label="Free delivery offer"
+      aria-label="Special offer"
     >
-      {/* Backdrop */}
       <button
         aria-label="Close"
         onClick={close}
         className="absolute inset-0 bg-[var(--charcoal)]/40 backdrop-blur-sm"
       />
 
-      {/* Card */}
       <div className="relative w-full max-w-md border border-[var(--sand-deep)]/50 bg-[var(--ivory)] px-8 py-10 text-center shadow-xl">
         <button
           onClick={close}
@@ -69,12 +69,12 @@ export default function PromoPopup() {
           Free Delivery
         </h2>
         <p className="mt-2 font-[family-name:var(--font-cormorant)] text-lg italic text-[var(--gold)]">
-          for our first 100 customers
+          for our first 500 customers
         </p>
 
         <p className="mt-5 text-sm leading-relaxed text-[var(--muted)]">
           Be among the first to bring SILORA home — your order ships free,
-          nationwide.
+          nationwide. Plus enjoy up to 50% off this season.
         </p>
 
         <Link

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Jost, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/lib/cart";
+import AnnouncementBar from "@/components/AnnouncementBar";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 const jost = Jost({
   subsets: ["latin"],
@@ -30,7 +32,11 @@ export default function RootLayout({
       <body
         className={`${jost.variable} ${cormorant.variable} font-[family-name:var(--font-jost)]`}
       >
-        <CartProvider>{children}</CartProvider>
+        <AnnouncementBar />
+        <CartProvider>
+          {children}
+          <WhatsAppButton />
+        </CartProvider>
       </body>
     </html>
   );
