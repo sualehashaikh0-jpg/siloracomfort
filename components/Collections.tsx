@@ -2,15 +2,25 @@ import Link from "next/link";
 import Reveal from "./Reveal";
 import type { CategoryTile } from "@/lib/queries";
 
-const tones = ["#d9cdb8", "#cfc4ae", "#c5b79d", "#d3c6ad"];
+const tones = ["#d9cdb8", "#cfc4ae"];
+
+// Only these categories are shown on the home page
+const SHOW = ["bedsheets", "premium"];
+
+// Change the words inside the quotes to rename a tile
+const displayNames: Record<string, string> = {
+  bedsheets: "Bed Sheets",
+  premium: "Premium",
+};
+
 const taglines: Record<string, string> = {
   bedsheets: "Soft-washed cotton, king & queen",
-  "duvet-covers": "Buttoned, breathable, easy-care",
-  comforters: "Cloud-fill warmth for every season",
-  "bed-sets": "Complete looks, perfectly matched",
+  premium: "Discover the range",
 };
 
 export default function Collections({ categories }: { categories: CategoryTile[] }) {
+  const visible = categories.filter((c) => SHOW.includes(c.slug));
+
   return (
     <section id="collections" className="mx-auto max-w-7xl px-6 py-20 md:px-10 md:py-28">
       <Reveal>
@@ -22,8 +32,8 @@ export default function Collections({ categories }: { categories: CategoryTile[]
         </h2>
       </Reveal>
 
-      <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {categories.map((c, i) => (
+      <div className="mx-auto mt-12 grid max-w-4xl grid-cols-1 gap-5 sm:grid-cols-2">
+        {visible.map((c, i) => (
           <Reveal key={c.id} delay={i * 90}>
             <Link
               href={`/collections/${c.slug}`}
@@ -38,11 +48,11 @@ export default function Collections({ categories }: { categories: CategoryTile[]
                     : `linear-gradient(160deg, ${tones[i % tones.length]}, #cbbfa8)`,
                 }}
                 role="img"
-                aria-label={c.name}
+                aria-label={displayNames[c.slug] ?? c.name}
               />
               <div className="border border-t-0 border-[var(--line)] px-4 py-4 text-center">
                 <h3 className="tracking-nav text-[13px] text-[var(--charcoal)]">
-                  {c.name.toUpperCase()}
+                  {(displayNames[c.slug] ?? c.name).toUpperCase()}
                 </h3>
                 <p className="mt-1 font-[family-name:var(--font-cormorant)] text-sm italic text-[var(--muted)]">
                   {taglines[c.slug] ?? "Discover the range"}
