@@ -4,7 +4,7 @@
  */
 const messages = [
   "UP TO 50% OFF — LIMITED TIME",
-  "FREE DELIVERY FOR THE FIRST 500 CUSTOMERS",
+  "This season Free Delivery Nationwide",
   "CASH ON DELIVERY AVAILABLE NATIONWIDE",
   "1,000+ HAPPY CUSTOMERS",
 ];
