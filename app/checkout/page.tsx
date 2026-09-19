@@ -8,29 +8,7 @@ import { useCart } from "@/lib/cart";
 import { pkr } from "@/lib/queries";
 
 const SHIPPING = 0; // free nationwide
-const WHATSAPP = "https://wa.me/923450088846";
-
-type Method = "cod" | "meezan" | "easypaisa" | "sadapay";
-
-/** Account details shown to the customer after they pick a method. */
-const accountDetails: Record<Exclude<Method, "cod">, { label: string; lines: string[] }> = {
-  meezan: {
-    label: "Meezan Bank",
-    lines: [
-      "Account Title: SILORA",
-      "Account No: 126108983468",
-      "IBAN: PK02MEZN0012610108983468",
-    ],
-  },
-  easypaisa: {
-    label: "Easypaisa",
-    lines: ["Account Title: SILORA", "Number: 0345 0088846"],
-  },
-  sadapay: {
-    label: "SadaPay",
-    lines: ["Account Title: SILORA", "Number: 0325 7844153"],
-  },
-};
+const method = "cod"; // Cash on Delivery is the only payment option
 
 export default function CheckoutPage() {
   const { items, subtotal, clear } = useCart();
@@ -43,7 +21,6 @@ export default function CheckoutPage() {
     city: "",
     notes: "",
   });
-  const [method, setMethod] = useState<Method>("cod");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -98,13 +75,6 @@ export default function CheckoutPage() {
   const input =
     "w-full border border-[var(--line)] bg-transparent px-3 py-2.5 text-sm text-[var(--charcoal)] placeholder:text-[var(--muted)]/60 focus:border-[var(--charcoal)] focus:outline-none";
 
-  const methods: [Method, string, string][] = [
-    ["cod", "Cash on Delivery", "Pay when your order arrives"],
-    ["meezan", "Meezan Bank Transfer", "Bank transfer to our account"],
-    ["easypaisa", "Easypaisa", "Send to our Easypaisa account"],
-    ["sadapay", "SadaPay", "Send to our SadaPay account"],
-  ];
-
   return (
     <>
       <Navbar />
@@ -122,51 +92,11 @@ export default function CheckoutPage() {
             <textarea className={input} rows={3} placeholder="Order notes (optional)" value={form.notes} onChange={set("notes")} />
 
             <div className="pt-2">
-              <p className="tracking-nav mb-3 text-[12px] text-[var(--charcoal)]">PAYMENT METHOD</p>
-              <div className="space-y-2">
-                {methods.map(([val, title, sub]) => (
-                  <label
-                    key={val}
-                    className={`flex cursor-pointer items-start gap-3 border p-3 ${
-                      method === val ? "border-[var(--charcoal)]" : "border-[var(--line)]"
-                    }`}
-                  >
-                    <input type="radio" name="method" className="mt-1" checked={method === val} onChange={() => setMethod(val)} />
-                    <span>
-                      <span className="block text-sm text-[var(--charcoal)]">{title}</span>
-                      <span className="block text-xs text-[var(--muted)]">{sub}</span>
-                    </span>
-                  </label>
-                ))}
+              <p className="tracking-nav mb-3 text-[12px] text-[var(--charcoal)]">PAYMENT</p>
+              <div className="border border-[var(--line)] p-3">
+                <span className="block text-sm text-[var(--charcoal)]">Cash on Delivery</span>
+                <span className="block text-xs text-[var(--muted)]">Pay when your order arrives</span>
               </div>
-
-              {/* Account details for the selected online method */}
-              {method !== "cod" && (
-                <div className="mt-3 border border-[var(--line)] bg-[var(--marble)] p-4 text-sm text-[var(--charcoal)]">
-                  <p className="mb-2">
-                    Send <strong>{pkr(total)}</strong> to our{" "}
-                    <strong>{accountDetails[method].label}</strong> account:
-                  </p>
-                  <ul className="space-y-0.5">
-                    {accountDetails[method].lines.map((l) => (
-                      <li key={l}>{l}</li>
-                    ))}
-                  </ul>
-                  <p className="mt-3 border-t border-[var(--line)] pt-3">
-                    For a smooth process, please send a screenshot of your
-                    payment to our WhatsApp{" "}
-                    <a
-                      href={WHATSAPP}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="underline underline-offset-2"
-                    >
-                      0345 0088846
-                    </a>
-                    . We&apos;ll confirm and ship right away.
-                  </p>
-                </div>
-              )}
             </div>
 
             {error && <p className="text-sm text-red-700">{error}</p>}
