@@ -32,7 +32,7 @@ export default function Hero() {
             Up to 50% Off
           </h2>
           <p className="mt-2 font-[family-name:var(--font-cormorant)] text-lg italic text-[var(--ivory)]/90">
-            Free delivery for the first 500 customers
+            This Season Free Delivery Nationwide
           </p>
 
           <a
