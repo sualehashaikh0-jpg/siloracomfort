@@ -10,8 +10,8 @@ const helpLinks = [
   { href: "/shop", label: "Shop All" },
 ];
 
-// The three highlight lines shown in the footer
-const highlights = ["3-5 days delivery", "99% cotton", "Only export quality"];
+// Highlight line(s) shown in the footer
+const highlights = ["3-5 days delivery"];
 
 const INSTAGRAM =
   "https://www.instagram.com/silora.comfort?utm_source=qr&igsh=aWxhN2QxZ3pjZW0x";
