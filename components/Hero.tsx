@@ -1,18 +1,35 @@
-/**
- * Hero — public/hero.jpg with a permanent "Up to 50% Off" overlay.
- * Text is black for readability on the light photo.
- */
+"use client";
+
+import { useEffect, useState } from "react";
+
+// Slides: add or remove file names here (files live in the public folder)
+const slides = ["/hero.jpg", "/hero2.jpg", "/hero3.jpg"];
+const INTERVAL = 5000; // milliseconds between slides
+
 export default function Hero() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((i) => (i + 1) % slides.length);
+    }, INTERVAL);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <section
       className="relative flex min-h-[calc(100svh-4rem)] items-end overflow-hidden"
-      style={{
-        backgroundImage:
-          "url('/hero.jpg'), radial-gradient(120% 90% at 70% 20%, #eceade 0%, #e2ddd0 45%, #d6cfbf 100%)",
-        backgroundSize: "cover, cover",
-        backgroundPosition: "center, center",
-      }}
+      style={{ background: "radial-gradient(120% 90% at 70% 20%, #eceade 0%, #e2ddd0 45%, #d6cfbf 100%)" }}
     >
+      {slides.map((src, i) => (
+        <div
+          key={src}
+          aria-hidden
+          className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
+          style={{ backgroundImage: `url('${src}')`, opacity: i === index ? 1 : 0 }}
+        />
+      ))}
+
       <div className="relative mx-auto w-full max-w-7xl px-6 pb-16 md:px-10 md:pb-20">
         <div className="flex flex-col items-center text-center">
           <p className="tracking-nav text-[12px] text-black">THIS SEASON</p>
@@ -29,11 +46,16 @@ export default function Hero() {
         </div>
       </div>
 
-      <a href="#collections" aria-label="Scroll to collections" className="animate-drift absolute bottom-5 left-1/2 -translate-x-1/2 text-black">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden>
-          <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </a>
+      <div className="absolute bottom-5 left-1/2 flex -translate-x-1/2 gap-2">
+        {slides.map((src, i) => (
+          <button
+            key={src}
+            onClick={() => setIndex(i)}
+            aria-label={`Show slide ${i + 1}`}
+            className={`h-2 w-2 rounded-full transition ${i === index ? "bg-black" : "bg-black/30"}`}
+          />
+        ))}
+      </div>
     </section>
   );
 }
