@@ -25,9 +25,7 @@ export default function Hero() {
 
       <div className="relative mx-auto w-full max-w-7xl px-6 pb-16 md:px-10 md:pb-20">
         <div className="flex flex-col items-center text-center">
-          <p className="tracking-nav text-[12px] text-[var(--ivory)]/90">
-            THIS SEASON
-          </p>
+          <p className="tracking-nav text-[12px] text-[var(--ivory)]/90">THIS SEASON</p>
           <h2 className="mt-2 font-[family-name:var(--font-cormorant)] text-4xl leading-tight text-[var(--ivory)] md:text-6xl">
             Up to 50% Off
           </h2>
@@ -35,20 +33,13 @@ export default function Hero() {
             This Season Free Delivery Nationwide
           </p>
 
-          
-            href="#collections"
-            className="tracking-nav mt-7 border border-[var(--ivory)]/70 bg-[var(--charcoal)]/20 px-8 py-3 text-[13px] text-[var(--ivory)] backdrop-blur-sm transition-colors hover:bg-[var(--ivory)] hover:text-[var(--charcoal)]"
-          >
+          <a href="#collections" className="tracking-nav mt-7 border border-[var(--ivory)]/70 bg-[var(--charcoal)]/20 px-8 py-3 text-[13px] text-[var(--ivory)] backdrop-blur-sm transition-colors hover:bg-[var(--ivory)] hover:text-[var(--charcoal)]">
             SHOP THE COLLECTIONS
           </a>
         </div>
       </div>
 
-      
-        href="#collections"
-        aria-label="Scroll to collections"
-              className="animate-drift absolute bottom-5 left-1/2 -translate-x-1/2 text-[var(--ivory)]"
-      >
+      <a href="#collections" aria-label="Scroll to collections" className="animate-drift absolute bottom-5 left-1/2 -translate-x-1/2 text-[var(--ivory)]">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden>
           <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
