@@ -2,14 +2,14 @@
 
 /* ── SILORA design tokens ─────────────────────────────── */
 :root {
-  --sand: #d8c6ac;        /* nav bar taupe */
-  --sand-deep: #c6b192;   /* hover / borders on sand */
-  --ivory: #edece7;       /* page background */
-  --marble: #e4e0d7;      /* section alt background */
-  --charcoal: #2b2a26;    /* primary text */
-  --gold: #b3925f;        /* monogram + accents */
-  --muted: #726c60;       /* secondary text */
-  --line: #d5cfc2;        /* hairline dividers */
+  --sand: #f7a8c4;        /* nav bar + footer: bubblegum pink */
+  --sand-deep: #ee86ab;   /* hover / borders on pink */
+  --ivory: #fff5f8;       /* page background: blush */
+  --marble: #ffe1ec;      /* cards and boxes: soft pink */
+  --charcoal: #3a1f2d;    /* text, top banner, buttons: deep plum */
+  --gold: #d81b72;        /* accents + stars: hot pink */
+  --muted: #86586c;       /* secondary text */
+  --line: #f6c9d9;        /* hairline dividers */
 }
 
 html {
