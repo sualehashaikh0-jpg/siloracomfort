@@ -20,6 +20,19 @@ const reviews = [
   },
 ];
 
+/**
+ * Short reviews, English or Urdu.
+ * lang is "en" or "ur". Leave the list empty to hide this row.
+ */
+const shortReviews: { name: string; text: string; lang: "en" | "ur" }[] = [
+  { name: "عائشہ طارق", text: "کپڑا بہت نرم اور پریمیم ہے، ڈلیوری تیز اور پیکنگ بہترین۔", lang: "ur" },
+  { name: "Humza Saeed", text: "Prices are above average, but the quality is worth it.", lang: "en" },
+  { name: "بلال فاروق", text: "سلائی اور فنشنگ بڑے اسٹورز سے بھی بہتر ہے۔", lang: "ur" },
+  { name: "Sana Malik", text: "Colours match the photos and wash beautifully.", lang: "en" },
+];
+
+const URDU_FONT = "'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Segoe UI', Tahoma, sans-serif";
+
 function Stars() {
   return (
     <div className="flex justify-center gap-0.5 text-[var(--gold)]" aria-hidden>
@@ -36,9 +49,7 @@ export default function Reviews() {
   return (
     <section id="reviews" className="mx-auto max-w-6xl px-6 py-20 md:px-10 md:py-28">
       <Reveal>
-        <p className="tracking-nav text-center text-[12px] text-[var(--gold)]">
-          KIND WORDS
-        </p>
+        <p className="tracking-nav text-center text-[12px] text-[var(--gold)]">KIND WORDS</p>
         <h2 className="mt-3 text-center font-[family-name:var(--font-cormorant)] text-3xl text-[var(--charcoal)] md:text-4xl">
           What our customers say
         </h2>
@@ -59,6 +70,29 @@ export default function Reviews() {
           </Reveal>
         ))}
       </div>
+
+      {shortReviews.length > 0 && (
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {shortReviews.map((r, i) => (
+            <Reveal key={r.name + i} delay={i * 90}>
+              <figure className="flex h-full flex-col border border-[var(--line)] bg-[var(--marble)]/50 p-4">
+                <Stars />
+                <blockquote
+                  dir={r.lang === "ur" ? "rtl" : "ltr"}
+                  lang={r.lang}
+                  style={r.lang === "ur" ? { fontFamily: URDU_FONT, lineHeight: 2 } : undefined}
+                  className={`mt-3 flex-1 text-center text-sm text-[var(--charcoal)]/85 ${r.lang === "en" ? "font-[family-name:var(--font-cormorant)] italic leading-relaxed" : ""}`}
+                >
+                  {r.text}
+                </blockquote>
+                <figcaption className={`mt-3 text-center text-[11px] text-[var(--charcoal)] ${r.lang === "en" ? "tracking-nav" : ""}`}>
+                  {r.lang === "en" ? r.name.toUpperCase() : r.name}
+                </figcaption>
+              </figure>
+            </Reveal>
+          ))}
+        </div>
+      )}
     </section>
   );
 }
