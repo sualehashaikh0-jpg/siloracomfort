@@ -1,49 +1,51 @@
-/**
- * Hero — public/hero.jpg with a permanent "Up to 50% Off" overlay.
- * SILORA wordmark is baked into the image; we add the promo text + CTA.
- */
-export default function Hero() {
+import Link from "next/link";
+import Reveal from "./Reveal";
+import type { CategoryTile } from "@/lib/queries";
+
+const tones = ["#d9cdb8", "#cfc4ae"];
+const SHOW = ["bedsheets", "premium"];
+const displayNames: Record<string, string> = { bedsheets: "Bed Sheets", premium: "Premium" };
+const taglines: Record<string, string> = { bedsheets: "Soft-washed cotton, king & queen", premium: "Discover the range" };
+
+export default function Collections({ categories }: { categories: CategoryTile[] }) {
+  const visible = categories.filter((c) => SHOW.includes(c.slug));
+
   return (
-    <section
-      className="relative flex min-h-[calc(100svh-4rem)] items-end overflow-hidden"
-      style={{
-        backgroundImage:
-          "url('/hero.jpg'), radial-gradient(120% 90% at 70% 20%, #eceade 0%, #e2ddd0 45%, #d6cfbf 100%)",
-        backgroundSize: "cover, cover",
-        backgroundPosition: "center, center",
-      }}
-    >
-      {/* Bottom scrim for readable overlay text */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(to bottom, rgba(0,0,0,0) 45%, rgba(43,42,38,0.42) 100%)",
-        }}
-      />
+    <section id="collections" className="mx-auto max-w-7xl px-6 py-20 md:px-10 md:py-28">
+      <Reveal>
+        <p className="tracking-nav text-center text-[12px] text-[var(--gold)]">THE RANGE</p>
+        <h2 className="mt-3 text-center font-[family-name:var(--font-cormorant)] text-3xl text-[var(--charcoal)] md:text-4xl">
+          Collections
+        </h2>
+      </Reveal>
 
-      <div className="relative mx-auto w-full max-w-7xl px-6 pb-16 md:px-10 md:pb-20">
-        <div className="flex flex-col items-center text-center">
-          <p className="tracking-nav text-[12px] text-[var(--ivory)]/90">THIS SEASON</p>
-          <h2 className="mt-2 font-[family-name:var(--font-cormorant)] text-4xl leading-tight text-[var(--ivory)] md:text-6xl">
-            Up to 50% Off
-          </h2>
-          <p className="mt-2 font-[family-name:var(--font-cormorant)] text-lg italic text-[var(--ivory)]/90">
-            This Season Free Delivery Nationwide
-          </p>
-
-          <a href="#collections" className="tracking-nav mt-7 border border-[var(--ivory)]/70 bg-[var(--charcoal)]/20 px-8 py-3 text-[13px] text-[var(--ivory)] backdrop-blur-sm transition-colors hover:bg-[var(--ivory)] hover:text-[var(--charcoal)]">
-            SHOP THE COLLECTIONS
-          </a>
-        </div>
+      <div className="mx-auto mt-12 grid max-w-4xl grid-cols-1 gap-5 sm:grid-cols-2">
+        {visible.map((c, i) => (
+          <Reveal key={c.id} delay={i * 90}>
+            <Link href={`/collections/${c.slug}`} className="group block overflow-hidden">
+              <div
+                className="aspect-[3/4] w-full bg-cover bg-center transition-transform duration-700 group-hover:scale-[1.03]"
+                style={{
+                  backgroundColor: tones[i % tones.length],
+                  backgroundImage: c.image
+                    ? `url('${c.image}')`
+                    : `linear-gradient(160deg, ${tones[i % tones.length]}, #cbbfa8)`,
+                }}
+                role="img"
+                aria-label={displayNames[c.slug] ?? c.name}
+              />
+              <div className="border border-t-0 border-[var(--line)] px-4 py-4 text-center">
+                <h3 className="tracking-nav text-[13px] text-[var(--charcoal)]">
+                  {(displayNames[c.slug] ?? c.name).toUpperCase()}
+                </h3>
+                <p className="mt-1 font-[family-name:var(--font-cormorant)] text-sm italic text-[var(--muted)]">
+                  {taglines[c.slug] ?? "Discover the range"}
+                </p>
+              </div>
+            </Link>
+          </Reveal>
+        ))}
       </div>
-
-      <a href="#collections" aria-label="Scroll to collections" className="animate-drift absolute bottom-5 left-1/2 -translate-x-1/2 text-[var(--ivory)]">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden>
-          <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </a>
     </section>
   );
 }
