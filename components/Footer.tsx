@@ -2,9 +2,6 @@ import Link from "next/link";
 
 const shopLinks = [
   { href: "/collections/bedsheets", label: "Bed Sheets" },
-  { href: "/collections/duvet-covers", label: "Duvet Covers" },
-  { href: "/collections/comforters", label: "Comforters" },
-  { href: "/collections/bed-sets", label: "Bed Sets" },
   { href: "/collections/premium", label: "Premium" },
 ];
 
