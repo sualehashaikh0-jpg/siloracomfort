@@ -10,6 +10,9 @@ const helpLinks = [
   { href: "/shop", label: "Shop All" },
 ];
 
+// The three highlight lines shown in the footer
+const highlights = ["3-5 days delivery", "99% cotton", "Only export quality"];
+
 const INSTAGRAM =
   "https://www.instagram.com/silora.comfort?utm_source=qr&igsh=aWxhN2QxZ3pjZW0x";
 const FACEBOOK = "https://www.facebook.com/share/18u7SMCFNr";
@@ -27,6 +30,11 @@ export default function Footer() {
           <p className="mt-4 max-w-xs font-[family-name:var(--font-cormorant)] text-sm italic leading-relaxed text-[var(--charcoal)]/70">
             Premium bedding, delivered across Pakistan.
           </p>
+          <ul className="mt-4 space-y-1.5 text-sm text-[var(--charcoal)]/75">
+            {highlights.map((t) => (
+              <li key={t}>{t}</li>
+            ))}
+          </ul>
           <div className="mt-5 flex gap-4">
             <a href={INSTAGRAM} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-[var(--charcoal)]/70 transition-colors hover:text-[var(--charcoal)]">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
