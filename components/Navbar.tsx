@@ -6,7 +6,7 @@ import { useCart } from "@/lib/cart";
 
 const links = [
   { href: "/", label: "HOME" },
-  { href: "/collections", label: "COLLECTIONS" },
+  { href: "/#collections", label: "COLLECTIONS" },
   { href: "/shop", label: "SHOP ALL" },
   { href: "/#reviews", label: "REVIEWS" },
 ];
@@ -19,11 +19,7 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 border-b border-[var(--sand-deep)]/40 bg-[var(--sand)]">
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 md:px-8">
         {/* Mobile: brand on the left */}
-        <Link
-          href="/"
-          className="tracking-brand text-sm font-light md:hidden"
-          aria-label="SILORA home"
-        >
+        <Link href="/" className="tracking-brand text-sm font-light md:hidden" aria-label="SILORA home">
           SILORA
         </Link>
 
@@ -31,22 +27,16 @@ export default function Navbar() {
         <ul className="hidden flex-1 items-center justify-center gap-10 md:flex">
           {links.map((l) => (
             <li key={l.href}>
-              <Link
-                href={l.href}
-                className="tracking-nav text-[13px] font-normal text-[var(--charcoal)]/85 transition-colors hover:text-[var(--charcoal)]"
-              >
+              <Link href={l.href} className="tracking-nav text-[13px] font-normal text-[var(--charcoal)]/85 transition-colors hover:text-[var(--charcoal)]">
                 {l.label}
               </Link>
             </li>
           ))}
         </ul>
 
-        {/* Right cluster: cart / user */}
+        {/* Right cluster: cart */}
         <div className="flex items-center gap-6">
-          <Link
-            href="/cart"
-            className="tracking-nav flex items-center gap-2 text-[13px] text-[var(--charcoal)]/85 transition-colors hover:text-[var(--charcoal)]"
-          >
+          <Link href="/cart" className="tracking-nav flex items-center gap-2 text-[13px] text-[var(--charcoal)]/85 transition-colors hover:text-[var(--charcoal)]">
             <CartIcon />
             <span className="hidden sm:inline">CART</span>
             {count > 0 && (
@@ -57,12 +47,7 @@ export default function Navbar() {
           </Link>
 
           {/* Mobile hamburger */}
-          <button
-            onClick={() => setOpen(!open)}
-            aria-label={open ? "Close menu" : "Open menu"}
-            aria-expanded={open}
-            className="md:hidden"
-          >
+          <button onClick={() => setOpen(!open)} aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} className="md:hidden">
             <span className="block h-px w-6 bg-[var(--charcoal)]" />
             <span className="mt-1.5 block h-px w-6 bg-[var(--charcoal)]" />
             <span className="mt-1.5 block h-px w-6 bg-[var(--charcoal)]" />
@@ -75,11 +60,7 @@ export default function Navbar() {
         <ul className="border-t border-[var(--sand-deep)]/40 bg-[var(--sand)] px-5 pb-5 pt-3 md:hidden">
           {links.map((l) => (
             <li key={l.href}>
-              <Link
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="tracking-nav block py-3 text-[13px] text-[var(--charcoal)]/85"
-              >
+              <Link href={l.href} onClick={() => setOpen(false)} className="tracking-nav block py-3 text-[13px] text-[var(--charcoal)]/85">
                 {l.label}
               </Link>
             </li>
