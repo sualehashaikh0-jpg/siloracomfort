@@ -47,4 +47,12 @@ export default function Hero() {
       
         href="#collections"
         aria-label="Scroll to collections"
-        className="animate-drift absolute bottom-5
+              className="animate-drift absolute bottom-5 left-1/2 -translate-x-1/2 text-[var(--ivory)]"
+      >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden>
+          <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </a>
+    </section>
+  );
+}
