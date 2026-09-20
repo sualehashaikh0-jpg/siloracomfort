@@ -2,6 +2,10 @@
  * Hero — public/hero.jpg with a permanent "Up to 50% Off" overlay.
  * Text is black for readability on the light photo.
  */
+
+const buttonClass =
+  "tracking-nav mt-7 border border-black/70 bg-white/25 px-8 py-3 text-[13px] text-black backdrop-blur-sm transition-colors hover:bg-black hover:text-white";
+
 export default function Hero() {
   return (
     <section
@@ -15,9 +19,7 @@ export default function Hero() {
     >
       <div className="relative mx-auto w-full max-w-7xl px-6 pb-16 md:px-10 md:pb-20">
         <div className="flex flex-col items-center text-center">
-          <p className="tracking-nav text-[12px] text-black">
-            THIS SEASON
-          </p>
+          <p className="tracking-nav text-[12px] text-black">THIS SEASON</p>
           <h2 className="mt-2 font-[family-name:var(--font-cormorant)] text-4xl leading-tight text-black md:text-6xl">
             Up to 50% Off
           </h2>
@@ -25,10 +27,7 @@ export default function Hero() {
             This Season Free Delivery Nationwide
           </p>
 
-          
-            href="#collections"
-            className="tracking-nav mt-7 border border-black/70 bg-white/25 px-8 py-3 text-[13px] text-black backdrop-blur-sm transition-colors hover:bg-black hover:text-white"
-          >
+          <a href="#collections" className={buttonClass}>
             SHOP THE COLLECTIONS
           </a>
         </div>
