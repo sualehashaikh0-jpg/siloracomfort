@@ -9,8 +9,8 @@ const SHOW = ["bedsheets", "premium"];
 
 // Change the words inside the quotes to rename a tile
 const displayNames: Record<string, string> = {
-  bedsheets: "Bed Sheets",
-  premium: "Premium",
+  bedsheets: "Export Quality Cotton Bedsheets",
+  premium: "99% Cotton",
 };
 
 const taglines: Record<string, string> = {
@@ -24,9 +24,7 @@ export default function Collections({ categories }: { categories: CategoryTile[]
   return (
     <section id="collections" className="mx-auto max-w-7xl px-6 py-20 md:px-10 md:py-28">
       <Reveal>
-        <p className="tracking-nav text-center text-[12px] text-[var(--gold)]">
-          THE RANGE
-        </p>
+        <p className="tracking-nav text-center text-[12px] text-[var(--gold)]">THE RANGE</p>
         <h2 className="mt-3 text-center font-[family-name:var(--font-cormorant)] text-3xl text-[var(--charcoal)] md:text-4xl">
           Collections
         </h2>
@@ -35,10 +33,7 @@ export default function Collections({ categories }: { categories: CategoryTile[]
       <div className="mx-auto mt-12 grid max-w-4xl grid-cols-1 gap-5 sm:grid-cols-2">
         {visible.map((c, i) => (
           <Reveal key={c.id} delay={i * 90}>
-            <Link
-              href={`/collections/${c.slug}`}
-              className="group block overflow-hidden"
-            >
+            <Link href={`/collections/${c.slug}`} className="group block overflow-hidden">
               <div
                 className="aspect-[3/4] w-full bg-cover bg-center transition-transform duration-700 group-hover:scale-[1.03]"
                 style={{
