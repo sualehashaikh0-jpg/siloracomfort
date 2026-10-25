@@ -27,6 +27,9 @@ const input =
   "w-full border border-[var(--line)] bg-transparent px-3 py-2.5 text-sm text-[var(--charcoal)] placeholder:text-[var(--muted)]/60 focus:border-[var(--charcoal)] focus:outline-none";
 const label = "tracking-nav mb-1.5 block text-[11px] text-[var(--charcoal)]";
 
+// Only these categories show in the admin dropdown
+const VISIBLE_CATEGORIES = ["Bed Sheets", "Premium"];
+
 export default function ProductForm({
   categories,
   product,
@@ -118,11 +121,13 @@ export default function ProductForm({
             defaultValue={product?.category_id ?? ""}
           >
             <option value="">— none —</option>
-            {categories.map((c) => (
-              <option key={c.id} value={c.id}>
-                {c.name}
-              </option>
-            ))}
+            {categories
+              .filter((c) => VISIBLE_CATEGORIES.includes(c.name))
+              .map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.name}
+                </option>
+              ))}
           </select>
         </div>
         <div className="grid grid-cols-2 gap-3">
